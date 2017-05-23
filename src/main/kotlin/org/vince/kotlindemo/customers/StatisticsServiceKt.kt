@@ -11,16 +11,14 @@ class StatisticService {
 
     fun String.readCurrency(): Double = this.substring(1).replace(',', '.').toDouble()
 
-    fun readCustomers(inputStream:InputStream): List<Customer> =
+    fun readCustomers(inputStream: InputStream): List<Customer> =
             ObjectMapper()
                     .registerModule(KotlinModule())
-                    .readValue(
-                            inputStream,
-                            CustomerContainer::class.java
-                    ).data
+                    .readValue(inputStream, Array<Customer>::class.java)
+                    .asList()
 
     @Throws(IOException::class)
-    fun groupTurnoverByCountry(inputStream:InputStream): Map<String, BigDecimal> =
+    fun groupTurnoverByCountry(inputStream: InputStream): Map<String, BigDecimal> =
             readCustomers(inputStream).groupBy(Customer::country)
                     .mapValues { (_, customers) ->
                         BigDecimal(
