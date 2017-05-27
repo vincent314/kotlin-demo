@@ -5,6 +5,6 @@ data class Customer(
         var firstname: String,
         var lastname: String,
         var email: String,
-        var turnover: String,
+        var turnover: String?,
         var country: String
 )

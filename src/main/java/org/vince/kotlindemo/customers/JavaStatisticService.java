@@ -5,37 +5,42 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
 public class JavaStatisticService {
-
-    public List<JavaCustomer> readCustomers(InputStream inputStream) throws IOException {
+    public static List<JavaCustomer> readCustomers(InputStream inputStream) throws IOException {
         return Arrays.asList(new ObjectMapper().readValue(
                 inputStream,
                 JavaCustomer[].class
         ));
     }
 
-    public Map<String, BigDecimal> groupTurnoverByCountry(InputStream inputStream) throws IOException {
-        Map<String, List<JavaCustomer>> byCountry = readCustomers(inputStream).stream()
+    public static Map<String, BigDecimal> groupTurnoverByCountry(List<JavaCustomer> customers){
+        ToDoubleFunction<String> parseCurrency = str ->
+                Double.valueOf(str.substring(1).replace(',', '.'));
+
+        Map<String, List<JavaCustomer>> byCountry = customers.stream()
                 .collect(Collectors.groupingBy(JavaCustomer::getCountry));
 
         return byCountry.entrySet().stream()
                 .map(entry -> {
-                    List<JavaCustomer> customers = entry.getValue();
+                    List<JavaCustomer> subList = entry.getValue();
 
-                    Double sum = customers.stream()
+                    Double sum = subList.stream()
                             .map(JavaCustomer::getTurnover)
-                            .mapToDouble(str -> Double
-                                    .valueOf(str.substring(1).replace(',', '.')))
+                            .filter(Objects::nonNull)
+                            .mapToDouble(parseCurrency)
                             .sum();
 
-                    return new AbstractMap.SimpleImmutableEntry<>(entry.getKey(), new BigDecimal(sum).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    return new AbstractMap.SimpleImmutableEntry<>(
+                            entry.getKey(),
+                            new BigDecimal(sum).setScale(2, BigDecimal.ROUND_HALF_UP));
                 })
-                .collect(Collectors.toMap(AbstractMap.SimpleImmutableEntry::getKey, AbstractMap.SimpleImmutableEntry::getValue));
+                .collect(Collectors.toMap(
+                        AbstractMap.SimpleImmutableEntry::getKey,
+                        AbstractMap.SimpleImmutableEntry::getValue)
+                );
     }
 }

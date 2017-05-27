@@ -9,6 +9,17 @@ public class JavaCustomer {
     private String turnover;
     private String country;
 
+    public JavaCustomer(){ }
+
+    public JavaCustomer(String id, String firstname, String lastname, String email, String turnover, String country) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.turnover = turnover;
+        this.country = country;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "firstname": "Crissy",
+    "lastname": "Megahey",
+    "email": "cmegahey0@macromedia.com",
+    "turnover": "€1444,71",
+    "country": "Germany"
+  },
+  null,
+  {
+    "id": 2,
+    "firstname": "Farly",
+    "lastname": "Joice",
+    "email": "fjoice1@multiply.com",
+    "turnover": "€368,51",
+    "country": "Luxembourg"
+  },
+  {
+    "id": 3,
+    "firstname": "Lucinda",
+    "lastname": "Mayoral",
+    "email": "lmayoral2@prlog.org",
+    "turnover": "€9310,51",
+    "country": "France"
+  },
+  {
+    "id": 4,
+    "firstname": "Hannis",
+    "lastname": "Gernier",
+    "email": "hgernier3@tamu.edu",
+    "turnover": "€5767,96",
+    "country": "Germany"
+  }
+]
