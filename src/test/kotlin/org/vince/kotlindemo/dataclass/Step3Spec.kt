@@ -1,4 +1,4 @@
-package org.vince.kotlindemo.step3
+package org.vince.kotlindemo.dataclass
 
 import org.amshove.kluent.shouldEqualTo
 import org.jetbrains.spek.api.Spek
@@ -11,7 +11,6 @@ object Step3Spec:Spek ({
     describe("Data class"){
         it("Should use destructured declaration"){
             val (firstname, surname) = User(firstname = "John", surname = "DOE")
-
             "$firstname $surname" shouldEqualTo "John DOE"
         }
     }
