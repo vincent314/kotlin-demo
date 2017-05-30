@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
-public class JavaStatisticService {
+public class JavaCustomerService {
     public static List<JavaCustomer> readCustomers(InputStream inputStream) throws IOException {
         return Arrays.asList(new ObjectMapper().readValue(
                 inputStream,

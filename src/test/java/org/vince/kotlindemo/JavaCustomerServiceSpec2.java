@@ -13,10 +13,10 @@ import java.util.Map;
 
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static org.junit.Assert.assertEquals;
-import static org.vince.kotlindemo.customers.JavaStatisticService.groupTurnoverByCountry;
-import static org.vince.kotlindemo.customers.JavaStatisticService.readCustomers;
+import static org.vince.kotlindemo.customers.JavaCustomerService.groupTurnoverByCountry;
+import static org.vince.kotlindemo.customers.JavaCustomerService.readCustomers;
 
-public class JavaStatisticsSpec2 {
+public class JavaCustomerServiceSpec2 {
 
     private ClassPathResource resource;
     private Map<String, BigDecimal> expectedValues;

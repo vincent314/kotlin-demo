@@ -8,13 +8,12 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.springframework.core.io.ClassPathResource
 import org.vince.kotlindemo.customers.Customer
-import org.vince.kotlindemo.customers.StatisticService
+import org.vince.kotlindemo.customers.CustomerService
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-object StatisticsSpecs : Spek({
+object CustomerServiceSpecs : Spek({
     fun Double.toBigDecimal() = BigDecimal(this).setScale(2, RoundingMode.HALF_UP)
-    fun BigDecimal.plus(other: BigDecimal): BigDecimal = this.plus(other)
 
     describe("Statistic Service") {
 
@@ -40,7 +39,7 @@ object StatisticsSpecs : Spek({
                         )
                 )
 
-                StatisticService.groupTurnoverByCountry(customers) shouldEqual hashMapOf("France" to 30.0.toBigDecimal())
+                CustomerService.groupTurnoverByCountry(customers) shouldEqual hashMapOf("France" to 30.0.toBigDecimal())
             }
         }
 
@@ -58,10 +57,10 @@ object StatisticsSpecs : Spek({
             )
 
             it("should group by country with Kotlin") {
-                val customers = StatisticService
+                val customers = CustomerService
                         .readCustomers(testResource.inputStream)
                         .filterNotNull()
-                StatisticService.groupTurnoverByCountry(customers) shouldEqual expectedValues
+                CustomerService.groupTurnoverByCountry(customers) shouldEqual expectedValues
             }
         }
 
@@ -69,7 +68,7 @@ object StatisticsSpecs : Spek({
             val testResource = ClassPathResource("customers-with-null.json")
 
             it("should not be able to read file") {
-                val customers: List<Customer?> = StatisticService
+                val customers: List<Customer?> = CustomerService
                         .readCustomers(testResource.inputStream)
                 customers.size shouldBe 5
             }

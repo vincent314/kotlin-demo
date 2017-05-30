@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static org.junit.Assert.assertEquals;
-import static org.vince.kotlindemo.customers.JavaStatisticService.groupTurnoverByCountry;
+import static org.vince.kotlindemo.customers.JavaCustomerService.groupTurnoverByCountry;
 
-public class JavaStatisticsSpec1 {
+public class JavaCustomerServiceSpec1 {
 
-    List<JavaCustomer> customers;
+    private List<JavaCustomer> customers;
 
     @Before
     public void setup(){

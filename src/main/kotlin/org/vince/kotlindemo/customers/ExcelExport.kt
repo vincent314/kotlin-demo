@@ -57,7 +57,7 @@ class Sheet(val sheet: SXSSFSheet, val workbook: Workbook) {
     }
 
     fun customers(filename: String): List<Customer> =
-            StatisticService.readCustomers(ClassPathResource(filename).inputStream)
+            CustomerService.readCustomers(ClassPathResource(filename).inputStream)
                     .filterNotNull()
 }
 
@@ -70,25 +70,21 @@ class Row(val row: SXSSFRow, val workbook: Workbook) {
         return sxssfCell
     }
 
-    fun cell(text: String, style: CellStyle? = null): Cell {
+    fun cell(text: String, style: CellStyle? = null) {
         val sxssfCell = buildCell(style)
         sxssfCell.setCellValue(text)
-        return Cell(sxssfCell)
     }
 
-    fun cell(value: Double, style: CellStyle? = null): Cell {
+    fun cell(value: Double, style: CellStyle? = null) {
         val sxssfCell = buildCell(style)
         sxssfCell.setCellValue(value)
-        return Cell(sxssfCell)
     }
 }
 
-class Cell(val cell: SXSSFCell)
-
-fun workbook(init: Workbook.() -> Unit): Workbook {
+fun workbook(filename:String, init: Workbook.() -> Unit) {
     val workbook = Workbook()
     workbook.init()
-    return workbook
+    workbook.write(File(filename))
 }
 
 
@@ -102,7 +98,7 @@ fun buildIterator(): Iterator<Int> {
 }
 
 fun main(args: Array<String>) {
-    workbook {
+    workbook(filename = "/tmp/test.xlsx") {
         sheet(
                 sheetName = "Test 1",
                 colSize = arrayOf(5000, 5000, 7000, 4000, 5000)) {
@@ -123,6 +119,6 @@ fun main(args: Array<String>) {
                 }
             }
         }
-    }.write(File("/tmp/test.xlsx"))
+    }
 }
 

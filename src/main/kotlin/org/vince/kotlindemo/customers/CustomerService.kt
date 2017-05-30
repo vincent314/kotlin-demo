@@ -6,7 +6,7 @@ import java.io.InputStream
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-object StatisticService {
+object CustomerService {
     fun readCustomers(inputStream: InputStream): List<Customer?> =
             ObjectMapper()
                     .registerModule(KotlinModule())
