@@ -1,5 +1,6 @@
 package org.vince.kotlindemo
 
+import org.amshove.kluent.`should equal`
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldEqual
 import org.jetbrains.spek.api.Spek
@@ -60,7 +61,7 @@ object CustomerServiceSpecs : Spek({
                 val customers = CustomerService
                         .readCustomers(testResource.inputStream)
                         .filterNotNull()
-                CustomerService.groupTurnoverByCountry(customers) shouldEqual expectedValues
+                CustomerService.groupTurnoverByCountry(customers) `should equal` expectedValues
             }
         }
 

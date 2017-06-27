@@ -17,7 +17,6 @@ object JapaneseSpec : Spek({
     }
 })
 
-val は = null
 val か = null
 
 infix fun Pair<String,String>.です(other: Nothing?) = this.first shouldEqualTo this.second
