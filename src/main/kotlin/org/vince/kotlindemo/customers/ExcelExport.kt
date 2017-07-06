@@ -57,7 +57,7 @@ class Sheet(val sheet: SXSSFSheet, val workbook: Workbook) {
     }
 
     fun customers(filename: String): List<Customer> =
-            CustomerService.readCustomers(ClassPathResource(filename).inputStream)
+            readCustomers(ClassPathResource(filename).inputStream)
                     .filterNotNull()
 }
 
