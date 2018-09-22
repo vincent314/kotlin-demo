@@ -1,10 +1,7 @@
 package org.vince.kotlindemo
 
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
-import org.amshove.kluent.shouldEqualTo
+import kotlinx.coroutines.experimental.*
+import org.amshove.kluent.shouldBeEqualTo
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
@@ -66,10 +63,10 @@ object KotlinSpecs : Spek({
             runBlocking {
                 println("start !")
                 val jobs = arrayOf(
-                        launch(CommonPool) {
+                        launch(Dispatchers.Default) {
                             doTimer("job A")
                         },
-                        launch(CommonPool) {
+                        launch(Dispatchers.Default) {
                             doTimer("job B", 500L)
                         })
                 println("end")
@@ -86,7 +83,7 @@ object KotlinSpecs : Spek({
             }
 
             it("amount should be formatted") {
-                "${o.amount} ${o.currency}" shouldEqualTo "40 €"
+                "${o.amount} ${o.currency}" shouldBeEqualTo "40 €"
             }
         }
     }

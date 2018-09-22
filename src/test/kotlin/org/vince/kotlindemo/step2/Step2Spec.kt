@@ -1,6 +1,6 @@
 package org.vince.kotlindemo.step2
 
-import org.amshove.kluent.shouldEqualTo
+import org.amshove.kluent.shouldBeEqualTo
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
@@ -21,7 +21,7 @@ object Step2Spec:Spek ({
             user.firstname = "john"
             user.surname = "doe"
 
-            "${user.firstname} ${user.surname}".shouldEqualTo("John DOE")
+            "${user.firstname} ${user.surname}".shouldBeEqualTo("John DOE")
         }
     }
 })
